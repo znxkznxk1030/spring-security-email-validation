@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class RegistrationService {
 
+    public static final String EMAIL_NOT_VALID = "email not valid";
+
     private final AppUserService appUserService;
     private final EmailValidator emailValidator;
 
@@ -17,17 +19,17 @@ public class RegistrationService {
         boolean isValidEmail = emailValidator.test(request.getEmail());
 
         if (!isValidEmail) {
-            throw new IllegalStateException("email not valid");
+            throw new IllegalStateException(EMAIL_NOT_VALID);
         }
 
         appUserService.signupUser(new AppUser(
-            request.getFirstname(),
-                request.getLastname(),
-                request.getEmail(),
-                request.getPassword(),
-                AppUserRole.USER,
-                true,
-                false
+            request.getFirstName(),
+            request.getLastName(),
+            request.getEmail(),
+            request.getPassword(),
+            AppUserRole.USER,
+            true,
+            false
         ));
 
         return request.toString();

@@ -12,6 +12,7 @@ public class RegistrationController {
 
     @PostMapping("/")
     public String register(@RequestBody RegistrationRequest request) {
+        registrationService.register(request);
         return "work";
     }
 
