@@ -21,7 +21,7 @@ docker run \
     postgres
 ```
 
-### Inspect PostgreSQL
+### Inspect Database
 
 ```bash
 docker exec -it <PSQL-Container-ID> bash
