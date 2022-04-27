@@ -38,7 +38,7 @@ public class AppUser implements UserDetails {
     private AppUserRole appUserRole;
     private boolean expired;
     private boolean locked;
-    private boolean credentialsNonExpired;
+    private boolean credentialsNonExpired = true;
     private boolean enabled;
 //    Collection<? extends GrantedAuthority> authorities;
 

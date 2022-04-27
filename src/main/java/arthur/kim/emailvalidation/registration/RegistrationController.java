@@ -16,4 +16,8 @@ public class RegistrationController {
         return "work";
     }
 
+    @GetMapping(path = "confirm")
+    public String validate(@RequestParam String token) {
+        return registrationService.confirmToken(token);
+    }
 }
