@@ -60,7 +60,7 @@ public class AppUserService implements UserDetailsService {
         confirmationTokenService.saveConfirmationToken(confirmationToken);
 
         // TODO: Send Email
-        return "";
+        return token;
     }
 
     public void enableAppUser(String email) {

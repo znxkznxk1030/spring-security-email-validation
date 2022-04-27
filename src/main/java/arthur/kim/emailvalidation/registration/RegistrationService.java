@@ -1,5 +1,6 @@
 package arthur.kim.emailvalidation.registration;
 
+import arthur.kim.emailvalidation.email.EmailSender;
 import arthur.kim.emailvalidation.registration.token.ConfirmationToken;
 import arthur.kim.emailvalidation.registration.token.ConfirmationTokenService;
 import arthur.kim.emailvalidation.user.AppUser;
@@ -23,6 +24,7 @@ public class RegistrationService {
     private final AppUserService appUserService;
     private final EmailValidator emailValidator;
     private final ConfirmationTokenService confirmationTokenService;
+    private final EmailSender emailSender;
 
     public String register(RegistrationRequest request) {
         boolean isValidEmail = emailValidator.test(request.getEmail());
@@ -31,7 +33,7 @@ public class RegistrationService {
             throw new IllegalStateException(EMAIL_NOT_VALID);
         }
 
-        appUserService.signupUser(new AppUser(
+        String token = appUserService.signupUser(new AppUser(
             request.getFirstName(),
             request.getLastName(),
             request.getEmail(),
@@ -41,7 +43,9 @@ public class RegistrationService {
             false
         ));
 
-        return request.toString();
+        emailSender.send(request.getEmail(), buildEmail(token));
+
+        return token;
     }
 
     @Transactional
@@ -65,5 +69,9 @@ public class RegistrationService {
 
         appUserService.enableAppUser(confirmationToken.getAppUser().getEmail());
         return "confirmed";
+    }
+
+    private String buildEmail(String token) {
+        return "<html><body><div><a href=\"http://localhost:8080/api/v1/registration/confirm?token=" + token + "\">click to confirm</a></div></body></html>";
     }
 }

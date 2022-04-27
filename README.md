@@ -2,6 +2,10 @@
 
 to learn spring security email validation
 
+## Demo
+
+![demo](./figures/email-validation.gif)
+
 ## 구상도
 
 ![blueprint](./figures/blueprint.png)
@@ -28,3 +32,14 @@ docker exec -it <PSQL-Container-ID> bash
 #           호스트     |  포트 |  유저  |  DB     
 $ psql -h localhost -p 5432 -U admin registration -W # to authenticate to start using as postgres user
 ```
+
+![inspect db](./figures/inspect-db.png)
+
+## MailDev RUN
+
+```bash
+docker run -p 1080:1080 -p 1025:1025 maildev/maildev
+```
+
+![mail dev](./figures/maildev.png)
+
