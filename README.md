@@ -4,7 +4,7 @@ to learn spring security email validation
 
 ## Demo
 
-![demo](./figures/email-validation.gif)
+![demo](./figures/demo.gif)
 
 ## 구상도
 
